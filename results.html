@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %}My Results{% endblock %}
+
+{% block content %}
+<div class="content-header">
+    <h1>Your Risk Assessment Results</h1>
+    <p>Assessment completed on {{ assessments[0].date.strftime('%B %d, %Y') }}</p>
+</div>
+
+<div class="results-container">
+    <div class="results-main">
+        <div class="card">
+            <div class="risk-level-display risk-level-{{ assessments[0].risk_level.lower() | replace(' ', '-') }}">
+                <div class="icon">
+                    {% if assessments[0].risk_level == 'Low Risk' %}
+                    <i class="fa-solid fa-shield-halved"></i>
+                    {% elif assessments[0].risk_level == 'Moderate Risk' %}
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    {% else %}
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    {% endif %}
+                </div>
+                <h3>{{ assessments[0].risk_level }}</h3>
+                <div class="risk-score-container">
+                    <span class="risk-score">{{ "%.2f"|format(assessments[0].risk_score) }}</span> / 100
+                </div>
+                <p class="risk-description">Your risk factors suggest a {{ assessments[0].risk_level.lower() }} probability of developing breast cancer.</p>
+            </div>
+        </div>
+
+        <div class="card risk-factors-summary results-card">
+            <div class="card-title">
+                <i class="fa-solid fa-book"></i>
+                <h2>Your Risk Factors</h2>
+            </div>
+            <table>
+                <tbody>
+                    <tr><td>Age:</td><td>{{ assessments[0].data.age }} years</td><td>Weight Status:</td><td>{{ assessments[0].data.weight | replace('_', ' ') | capitalize }}</td></tr>
+                    <tr><td>Family History:</td><td>{{ assessments[0].data.family_history | replace('_', ' ') | capitalize }}</td><td>Alcohol Use:</td><td>{{ assessments[0].data.alcohol | capitalize }}</td></tr>
+                    <tr><td>Menarche Age:</td><td>{{ assessments[0].data.menarche_age }}</td><td>Smoking Status:</td><td>{{ assessments[0].data.smoking | capitalize }}</td></tr>
+                    <tr><td>First Pregnancy:</td><td>{{ assessments[0].data.first_pregnancy_age | replace('_', ' ') | capitalize }}</td><td>Hormone Therapy:</td><td>{{ assessments[0].data.hrt | capitalize }}</td></tr>
+                    <tr><td>Previous Problems:</td><td>{{ assessments[0].data.breast_problems | capitalize }}</td><td>Physical Activity:</td><td>{{ assessments[0].data.activity | capitalize }}</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card recommendations-card results-card">
+            <div class="card-title">
+                <i class="fa-solid fa-hand-holding-medical"></i>
+                <h2>Personalized Recommendations</h2>
+            </div>
+            <ul>
+                <li><i class="fa-solid fa-user-doctor"></i> Schedule a consultation with your healthcare provider. <span class="priority medium">medium priority</span></li>
+                <li><i class="fa-solid fa-calendar-check"></i> Discuss these results during your visit. <span class="priority high">high priority</span></li>
+                <li><i class="fa-solid fa-notes-medical"></i> Perform monthly self-examinations. <span class="priority low">low priority</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="results-sidebar">
+        <div class="card emergency-resources-card">
+            <div class="card-title">
+                <i class="fa-solid fa-phone-volume"></i>
+                <h2>Emergency Resources</h2>
+            </div>
+            <ul>
+                <li><strong>National Cancer Institute</strong><br>1-800-4-CANCER</li>
+                <li><strong>American Cancer Society</strong><br>1-800-227-2345</li>
+            </ul>
+            <p class="mt-small" style="font-size: 0.85rem; color: var(--text-color-medium);">Call immediately if you notice any concerning breast changes.</p>
+        </div>
+
+        <div class="card assessment-history-card">
+            <div class="card-title">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <h2>Assessment History</h2>
+            </div>
+            {% for assessment in assessments %}
+            <a href="{{ url_for('show_result', assessment_id=assessment.id) }}" class="history-item">
+                <span class="history-item-date">{{ assessment.date.strftime('%b %d, %Y') }}</span>
+                <span class="history-item-score">{{ "%.0f"|format(assessment.risk_score) }} / 100</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

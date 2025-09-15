@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Assessment - Step 2{% endblock %}
+
+{% block content %}
+<div class="content-header">
+    <h1>Family & Personal History</h1>
+    <p>Please answer the following questions to assess your breast cancer risk.</p>
+</div>
+<div class="progress-label">
+    <span class="progress-text">Step 2 of 4</span>
+    <span>50% Complete <i class="fa-solid fa-circle-check"></i></span>
+</div>
+<div class="progress-bar-container">
+    <div class="progress-bar" style="width: 50%;"></div>
+</div>
+<form method="post">
+    <div class="card">
+        <div class="question-group">
+            <h3>Do you have a family history of breast or ovarian cancer? <span class="required-indicator">*</span></h3>
+            <p>Family history can significantly impact your risk level.</p>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="family_history" value="no" required>
+                    <span>No family history</span>
+                    <p>No known cases in immediate family</p>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="family_history" value="one">
+                    <span>One close relative</span>
+                    <p>Mother, sister, or daughter with breast/ovarian cancer</p>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="family_history" value="multiple">
+                    <span>Multiple relatives</span>
+                    <p>Two or more close relatives with breast/ovarian cancer</p>
+                </label>
+            </div>
+        </div>
+        <div class="question-group">
+            <h3>Have you had any breast problems in the past? <span class="required-indicator">*</span></h3>
+            <p>Previous breast conditions may affect your current risk.</p>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="breast_problems" value="no" required>
+                    <span>No previous problems</span>
+                    <p>No history of breast issues</p>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="breast_problems" value="benign">
+                    <span>Benign lumps or cysts</span>
+                    <p>Non-cancerous breast lumps</p>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="breast_problems" value="atypical">
+                    <span>Atypical hyperplasia</span>
+                    <p>Abnormal cell growth in breast tissue</p>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="breast_problems" value="lcis">
+                    <span>LCIS</span>
+                    <p>Lobular carcinoma in situ</p>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-navigation">
+        <a href="{{ url_for('step1') }}" class="btn btn-secondary">Previous</a>
+        <button type="submit" class="btn btn-primary">Next <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+</form>
+{% endblock %}

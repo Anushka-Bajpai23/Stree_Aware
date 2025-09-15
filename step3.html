@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Assessment - Step 3{% endblock %}
+
+{% block content %}
+<div class="content-header">
+    <h1>Reproductive History</h1>
+    <p>Please answer the following questions to assess your breast cancer risk.</p>
+</div>
+<div class="progress-label">
+    <span class="progress-text">Step 3 of 4</span>
+    <span>75% Complete <i class="fa-solid fa-circle-check"></i></span>
+</div>
+<div class="progress-bar-container">
+    <div class="progress-bar" style="width: 75%;"></div>
+</div>
+<form method="post">
+    <div class="card">
+        <div class="question-group">
+            <h3>At what age did you start menstruating? <span class="required-indicator">*</span></h3>
+            <p>Early menstruation can slightly increase breast cancer risk.</p>
+            <div class="input-group">
+                <input type="number" name="menarche_age" id="menarche_age" placeholder="Age when periods started" min="5" max="20" required>
+            </div>
+        </div>
+        <div class="question-group">
+            <h3>When was your first full-term pregnancy? <span class="required-indicator">*</span></h3>
+            <p>Age at first pregnancy affects breast cancer risk.</p>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="first_pregnancy_age" value="before_20" required>
+                    <span>Before age 20</span>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="first_pregnancy_age" value="20_25">
+                    <span>Age 20-25</span>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="first_pregnancy_age" value="25_30">
+                    <span>Age 25-30</span>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="first_pregnancy_age" value="after_30">
+                    <span>After age 30</span>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="first_pregnancy_age" value="never">
+                    <span>Never been pregnant</span>
+                </label>
+            </div>
+        </div>
+        <div class="question-group">
+            <h3>Are you currently using hormone replacement therapy? <span class="required-indicator">*</span></h3>
+            <p>Hormone therapy may slightly increase breast cancer risk.</p>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="hrt" value="yes" required>
+                    <span>Yes, currently using HRT</span>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="hrt" value="no">
+                    <span>No, not using HRT</span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-navigation">
+        <a href="{{ url_for('step2') }}" class="btn btn-secondary">Previous</a>
+        <button type="submit" class="btn btn-primary">Next <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+</form>
+{% endblock %}

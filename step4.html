@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% block title %}Assessment - Step 4{% endblock %}
+
+{% block content %}
+<div class="content-header">
+    <h1>Lifestyle Factors</h1>
+    <p>Please answer the following questions to assess your breast cancer risk.</p>
+</div>
+<div class="progress-label">
+    <span class="progress-text">Step 4 of 4</span>
+    <span>100% Complete <i class="fa-solid fa-circle-check"></i></span>
+</div>
+<div class="progress-bar-container">
+    <div class="progress-bar" style="width: 100%;"></div>
+</div>
+<form method="post">
+    <div class="card">
+        <div class="question-group">
+            <h3>How would you describe your alcohol consumption? <span class="required-indicator">*</span></h3>
+            <p>Regular alcohol consumption can increase breast cancer risk.</p>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="alcohol" value="none" required>
+                    <span>I don't drink alcohol</span>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="alcohol" value="occasional">
+                    <span>Occasionally (1-2 drinks per week)</span>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="alcohol" value="moderate">
+                    <span>Moderate (3-7 drinks per week)</span>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="alcohol" value="heavy">
+                    <span>Heavy (8+ drinks per week)</span>
+                </label>
+            </div>
+        </div>
+        <div class="question-group">
+            <h3>How would you describe your physical activity level? <span class="required-indicator">*</span></h3>
+            <p>Regular physical activity can help reduce breast cancer risk.</p>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="activity" value="sedentary" required>
+                    <span>Sedentary</span>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="activity" value="light">
+                    <span>Light activity (1-2 days per week)</span>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="activity" value="moderate">
+                    <span>Moderate activity (3-4 days per week)</span>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="activity" value="active">
+                    <span>Very active (5+ days per week)</span>
+                </label>
+            </div>
+        </div>
+        <div class="question-group">
+            <h3>How would you describe your current weight status? <span class="required-indicator">*</span></h3>
+            <p>Being overweight after menopause can increase breast cancer risk.</p>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="weight" value="underweight" required>
+                    <span>Underweight</span>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="weight" value="normal">
+                    <span>Normal weight</span>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="weight" value="overweight">
+                    <span>Overweight</span>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="weight" value="obese">
+                    <span>Obese</span>
+                </label>
+            </div>
+        </div>
+        <div class="question-group">
+            <h3>What is your smoking history? <span class="required-indicator">*</span></h3>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="smoking" value="never" required>
+                    <span>Never smoked</span>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="smoking" value="past">
+                    <span>Past smoker</span>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="smoking" value="current">
+                    <span>Current smoker</span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-navigation">
+        <a href="{{ url_for('step3') }}" class="btn btn-secondary">Previous</a>
+        <button type="submit" class="btn btn-primary">Submit Assessment <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+</form>
+{% endblock %}

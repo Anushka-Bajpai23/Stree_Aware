@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block title %}Assessment - Step 1{% endblock %}
+
+{% block content %}
+<div class="content-header">
+    <h1>Basic Information</h1>
+    <p>Please answer the following questions to assess your breast cancer risk.</p>
+</div>
+<div class="progress-label">
+    <span class="progress-text">Step 1 of 4</span>
+    <span><span id="progress-status">0% Complete</span> <i id="progress-check" class="fa-solid fa-circle-check" style="color: #ccc;"></i></span>
+</div>
+<div class="progress-bar-container">
+    <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
+</div>
+<form method="post" id="step1-form">
+    <div class="card">
+        <div class="question-group">
+            <h3>What is your age? <span class="required-indicator">*</span> <i class="fa-solid fa-circle-question"></i></h3>
+            <p>Age is one of the most important risk factors for breast cancer.</p>
+            <div class="input-group">
+                <input type="number" name="age" id="age" min="1" max="120" required>
+            </div>
+        </div>
+        <div class="question-group">
+            <h3>Have you noticed any new lump or mass in your breast or under your arm? <span class="required-indicator">*</span></h3>
+            <p>New lumps or masses are a key symptom to consider.</p>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="lump" value="yes" required>
+                    <span>Yes</span>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="lump" value="no">
+                    <span>No</span>
+                </label>
+            </div>
+        </div>
+        <div class="question-group">
+            <h3>Have you noticed any changes in the size, shape, or skin texture of your breast (e.g., redness, dimpling, or puckering)? <span class="required-indicator">*</span></h3>
+            <p>Skin changes can be a sign of underlying issues.</p>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="skin_changes" value="yes" required>
+                    <span>Yes</span>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="skin_changes" value="no">
+                    <span>No</span>
+                </label>
+            </div>
+        </div>
+        <div class="question-group">
+            <h3>Have you experienced any unusual nipple discharge? <span class="required-indicator">*</span></h3>
+            <p>Nipple discharge is a symptom that should be evaluated by a professional.</p>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="nipple_changes" value="yes" required>
+                    <span>Yes</span>
+                </label>
+            </div>
+            <div class="radio-option">
+                <label class="radio-label">
+                    <input type="radio" name="nipple_changes" value="no">
+                    <span>No</span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-navigation">
+        <div></div>
+        <button type="submit" class="btn btn-primary">Next <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+</form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('step1-form');
+    const ageInput = document.getElementById('age');
+    const radioInputs = form.querySelectorAll('input[type="radio"]');
+    const progressBar = document.getElementById('progress-bar');
+    const progressStatus = document.getElementById('progress-status');
+    const progressCheck = document.getElementById('progress-check');
+
+    function updateProgress() {
+        const ageFilled = ageInput.value.trim() !== '';
+        const lumpFilled = form.querySelector('input[name="lump"]:checked') !== null;
+        const skinChangesFilled = form.querySelector('input[name="skin_changes"]:checked') !== null;
+        const nippleChangesFilled = form.querySelector('input[name="nipple_changes"]:checked') !== null;
+
+        if (ageFilled && lumpFilled && skinChangesFilled && nippleChangesFilled) {
+            progressBar.style.width = '25%';
+            progressStatus.textContent = '25% Complete';
+            progressCheck.style.color = 'var(--low-risk-color)';
+        } else {
+            progressBar.style.width = '0%';
+            progressStatus.textContent = '0% Complete';
+            progressCheck.style.color = '#ccc';
+        }
+    }
+
+    form.addEventListener('change', updateProgress);
+    ageInput.addEventListener('input', updateProgress);
+    updateProgress(); // Initial check on page load
+});
+</script>
+{% endblock %}

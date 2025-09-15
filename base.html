@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Stree Aware{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="main-layout">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-heart-pulse"></i>
+                <span class="logo-text">Stree Aware</span>
+                <p class="logo-subtext">Breast Health Assessment</p>
+            </div>
+            <nav class="navigation">
+                <h4>NAVIGATION</h4>
+                <ul>
+                    <li class="{% if 'assessment' in request.path %}active{% endif %}">
+                        <a href="{{ url_for('dashboard') }}"><i class="fa-solid fa-list-check"></i> Risk Assessment</a>
+                        <p class="nav-subtext">Take health assessment</p>
+                    </li>
+                    <li class="{% if 'results' in request.path %}active{% endif %}">
+                        <a href="{{ url_for('results') }}"><i class="fa-solid fa-clipboard-list"></i> My Results</a>
+                        <p class="nav-subtext">View past results</p>
+                    </li>
+                </ul>
+            </nav>
+            <div class="support">
+                <h4>SUPPORT</h4>
+                <div class="note-box">
+                    <p class="note-title"><i class="fa-solid fa-circle-info"></i> Important Note</p>
+                    <p>This tool provides risk assessment only. Always consult healthcare professionals for medical advice.</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <i class="fa-solid fa-user-circle"></i>
+                <div class="user-text">
+                    <p class="username">Hello, {{ current_user.username }}</p>
+                    <p class="user-status">Your health matters</p>
+                </div>
+                <a href="{{ url_for('logout') }}" class="logout-icon" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+            </div>
+        </aside>
+        <main class="content-area">
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+</body>
+</html>
