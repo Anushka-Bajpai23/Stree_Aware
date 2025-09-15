@@ -4,3 +4,8 @@ pandas
 
 gunicorn
 Flask-SQLAlchemy
+Flask-Login
+Flask-WTF
+Flask-Migrate
+python-dotenv
+
